@@ -1,7 +1,8 @@
 {
-  "name": "fastify-typescript-starter",
-  "version": "1.5.0",
-  "description": "Node.js boilerplate using fastify & TypeScript",
+  "name": "opmc-engine",
+  "version": "0.1.0",
+  "description": "OPMC scraping, parsing, GPT generator, API engine",
+  
   "type": "module",
   "scripts": {
     "lint": "eslint .",
@@ -25,10 +26,13 @@
   "keywords": [
     "nodejs",
     "fastify",
-    "typescript"
+    "typescript",
+    "ChatGPT",
+    "rss",
+    "api",
+    "openai"
   ],
-  "author": "Yonatan Bendahan",
-  "license": "MIT",
+  "author": "Shivam Bhattacharjee",
   "bugs": {
     "url": "https://github.com/yonathan06/fastify-typescript-starter/issues"
   },
