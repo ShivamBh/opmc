@@ -2,7 +2,6 @@
   "name": "opmc-engine",
   "version": "0.1.0",
   "description": "OPMC scraping, parsing, GPT generator, API engine",
-  
   "type": "module",
   "scripts": {
     "lint": "eslint .",
@@ -43,7 +42,9 @@
     "dotenv": "^16.0.3",
     "env-schema": "^5.1.1",
     "fastify": "^4.10.2",
-    "fastify-plugin": "^3.0.1"
+    "fastify-plugin": "^3.0.1",
+    "openai": "^3.2.1",
+    "rss-parser": "^3.13.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.15",
@@ -55,6 +56,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "pino-pretty": "^8.1.0",
     "prettier": "^2.8.0",
+    "prisma": "^4.13.0",
     "tsx": "^3.12.1",
     "typescript": "^4.9.3",
     "vitest": "^0.25.8"
