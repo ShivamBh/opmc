@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  opmc_db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=opmc
+      - POSTGRES_PASSWORD=opmc
+      - POSTGRES_DB=opmc_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+  opmc_redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
