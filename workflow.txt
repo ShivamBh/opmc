@@ -1,0 +1,13 @@
+Feed Engine:
+  - Add feed url
+  - Create Scheduler for url
+  - Create Parser for url
+  - Make Dynamic Scheduler
+  - Make dynamic parser
+
+REST Api: 
+  - CRUD feed list
+  - CRUD schedulers
+  - CRUD parsers
+  - CRUD generated articles
+  - CRUD feed items + history
