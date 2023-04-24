@@ -1,0 +1,66 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Article {
+  id String [pk]
+  title String
+  author String
+  publishedAt DateTime
+  generated GeneratedArticle
+  source Source [not null]
+  sourceId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Source {
+  id String [pk]
+  url String [unique, not null]
+  metadata Json
+  articles Article [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table GeneratedArticle {
+  id String [pk]
+  originalContent String [not null]
+  generatedContent String
+  published Boolean [not null, default: false]
+  article Article [not null]
+  articleId String [unique, not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Jobs {
+  id String [pk]
+  type JobType [not null, default: 'fetching']
+  sourceUrl String [not null]
+  articleId String [not null]
+  status ParseJobStates [not null, default: 'waiting']
+  error Json
+  metadata Json
+  completed Boolean [not null, default: false]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Enum JobType {
+  fetching
+  merging
+  generating
+}
+
+Enum ParseJobStates {
+  waiting
+  fetched
+  generated
+  failed
+  completed
+}
+
+Ref: Article.sourceId > Source.id
+
+Ref: GeneratedArticle.articleId - Article.id
