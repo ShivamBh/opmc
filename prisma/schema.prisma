@@ -47,6 +47,17 @@ model GeneratedArticle {
   updatedAt  DateTime @updatedAt
 }
 
+model Schedulers {
+  id String @id @db.Uuid
+  name String @unique
+  status SchedulerStatus?
+  cronText String
+  sourceId String @db.Uuid
+  lastRunAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
 model Jobs {
   id String @id @db.Uuid
   type JobType @default(fetching)
@@ -75,4 +86,10 @@ enum ParseJobStates {
   generated // success generating new article
   failed //fetching or generation failed, use error field
   completed // fetched and generated
+}
+
+enum SchedulerStatus {
+  active
+  crashed
+  noop
 }
