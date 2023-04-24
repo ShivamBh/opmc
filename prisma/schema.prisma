@@ -5,13 +5,74 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 
-model Feed {
+model Article {
   id String @id @db.Uuid
   title String?
+  author String?
+  publishedAt DateTime?
+  generated GeneratedArticle?
+  source Source @relation(fields: [sourceId], references: [id])
+  sourceId String @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Source {
+  id String @id @db.Uuid
+  url String @unique
+  metadata Json?
+  articles Article[]
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model GeneratedArticle {
+  id String @id @db.Uuid
+  originalContent String 
+  generatedContent String?
+  published Boolean @default(false)
+  article Article @relation(fields: [articleId], references: [id])
+  articleId String @db.Uuid @unique
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Jobs {
+  id String @id @db.Uuid
+  type JobType @default(fetching)
+  sourceUrl String
+  articleId String @db.Uuid
+  status ParseJobStates @default(waiting)
+  error Json?
+
+  // metadata: store job result(fetching or generating with extra stuff that the APIs return)
+  metadata Json?
+  completed Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+
+enum JobType {
+  fetching
+  merging
+  generating
+}
+
+enum ParseJobStates {
+  waiting // job hasnt started
+  fetched //fetch article from source
+  generated // success generating new article
+  failed //fetching or generation failed, use error field
+  completed // fetched and generated
 }
