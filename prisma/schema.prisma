@@ -58,6 +58,16 @@ model Schedulers {
   updatedAt  DateTime @updatedAt
 }
 
+model Scrapers {
+  id String @id @db.Uuid
+  name String
+  xpath String?
+  config Json?
+  sourceId String @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
 model Jobs {
   id String @id @db.Uuid
   type JobType @default(fetching)
