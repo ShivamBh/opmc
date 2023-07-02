@@ -11,3 +11,10 @@ REST Api:
   - CRUD parsers
   - CRUD generated articles
   - CRUD feed items + history
+
+Part1:
+ - fetch RSS feed
+ - store feed items
+ - check unique items 
+ - store only new items
+ 
